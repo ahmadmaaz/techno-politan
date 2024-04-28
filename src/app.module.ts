@@ -13,6 +13,8 @@ import { CampaignModule } from './campaign/campaign.module';
 import { LawModule } from './law/law.module';
 import Campaign from './campaign/entity/campaign.entity';
 import Comment from './campaign/entity/comment.entity';
+import Law from './law/entity/law.entity';
+import LawModificationRequest from './law/entity/law-modification-request';
 @Module({
   imports: [
 
@@ -23,7 +25,7 @@ import Comment from './campaign/entity/comment.entity';
       username: 'postgres',
       password: 'DC8E6A353Mmaaz',
       database: 'technoPolitan',
-      entities: [Citizen,Admin,MP,PC,User,Campaign,Comment],
+      entities: [Citizen,Admin,MP,PC,User,Campaign,Comment,Law,LawModificationRequest],
       synchronize: true,
     }),
     AuthModule,

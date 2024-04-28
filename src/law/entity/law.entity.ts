@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import LawModificationRequest from "./law-modification-request";
 
 @Entity()
 export default class Law{
@@ -21,7 +22,8 @@ export default class Law{
     @Column({nullable:true})
     parliamentMemberName:string;
     
-
+    @OneToMany(() => LawModificationRequest, modificationRequest => modificationRequest.law)
+    modificationRequests: LawModificationRequest[];
     @CreateDateColumn()
     createdAt: Date;
 }

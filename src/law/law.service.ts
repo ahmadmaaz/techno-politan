@@ -16,7 +16,7 @@ export class LawService {
         private lawRepository: Repository<Law>,
         @InjectRepository(LawModificationRequest)
         private lawModificationRepository: Repository<LawModificationRequest>,
-        @InjectRepository(Law)
+        @InjectRepository(User)
         private userRepository: Repository<User>,
     ) {}
 
@@ -47,7 +47,16 @@ export class LawService {
     }
 
     async findAll(res:Response){
-        return res.status(200).send(await this.lawRepository.find());
+        const laws= await this.lawRepository.find({relations:['modificationRequests','modificationRequests.user']});
+        laws.forEach((law:Law) =>{
+            law.modificationRequests= law.modificationRequests.map((req:LawModificationRequest)=>({
+                ...req,
+                userEmail:req.user.email,
+                userName: req.user.firstName + " " + req.user.lastName
+            }))
+            law.modificationRequests.forEach((lw)=> delete lw.user)
+        })
+        return res.status(200).send(laws);
     }
     async voteLaw(id: string, isUpvote: boolean, res: Response) {
         const law = await this.lawRepository.findOneBy({
