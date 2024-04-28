@@ -87,4 +87,20 @@ export class CampaignService {
       }),
     );
   }
+
+  async archiveCampaign(id:string,res:Response){
+    const campaign = await this.campaignRepository.findOneBy({
+        id: id,
+    });
+    if (!campaign) {
+        // campaign does not exist
+        res.status(400).send({ message: "Campaign doesn't exist" });
+    }
+    return res.status(200).send(
+        await this.campaignRepository.save({
+            ...campaign,
+            isPoliticalArchive:true
+        }),
+      );
+  }
 }

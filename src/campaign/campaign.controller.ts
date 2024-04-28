@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Res, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put, Res, UseGuards } from '@nestjs/common';
 import { CampaignService } from './campaign.service';
 import CampaignDTO from './dto/campaign.dto';
 import { Response } from 'express';
@@ -15,8 +15,15 @@ export class CampaignController {
     @Roles("pc")
     @UseGuards(AuthGuard,RoleGuard)
     @Post()
-    signUpCampaign(@Body() dto:CampaignDTO, @Res() res:Response){
+    createCampaign(@Body() dto:CampaignDTO, @Res() res:Response){
         return this.campaignService.createCampaign(dto,res);
+    }
+    
+    @Roles("pc")
+    @UseGuards(AuthGuard,RoleGuard)
+    @Put("/archive/:id")
+    archiveCampaign(@Param('id') id: string, @Res() res:Response){
+        return this.campaignService.archiveCampaign(id,res);
     }
 
     @UseGuards(AuthGuard)
@@ -30,6 +37,7 @@ export class CampaignController {
     downvoteCampaign(@Param('id') id: string,@Res() res:Response){
         return this.campaignService.voteCampaign(id,false,res);
     }
+
 
     @UseGuards(AuthGuard)
     @Get()
