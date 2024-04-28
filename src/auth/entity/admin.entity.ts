@@ -6,6 +6,6 @@ import { User } from "./user.entity";
 @Entity()
 export class Admin {
     @PrimaryGeneratedColumn('uuid')
-    id?: number;
+    id?: string;
 
 }

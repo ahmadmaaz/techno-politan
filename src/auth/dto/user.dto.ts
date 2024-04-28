@@ -5,7 +5,7 @@ export class UserDto{
 
     
     
-    id: number;
+    id: string;
 
     @IsNotEmpty()
     firstName!: string;

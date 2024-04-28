@@ -7,10 +7,16 @@ import { User } from './entity/user.entity';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { Admin } from './entity/admin.entity';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
     imports: [
         TypeOrmModule.forFeature([Citizen,Admin,MP,PC,User]),
+        JwtModule.register({
+            global: true,
+            secret: "TOP SECRET CODE OUF HEHEH",
+            signOptions: { expiresIn: '1d' },
+          }),
     ],
     controllers: [ AuthController],
     providers: [AuthService],

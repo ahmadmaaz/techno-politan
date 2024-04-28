@@ -9,11 +9,13 @@ import { CitizenDto } from './dto/citizen.dto';
 import MPDto from './dto/mp.dto';
 import PCDto from './dto/pc.dto';
 import { UserDto } from './dto/user.dto';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
   constructor(
     @InjectRepository(User) private userRepository: Repository<User>,
+    private jwtService: JwtService
   ) {}
 
   async signUpPc(dto: PCDto, res: Response) {
@@ -65,31 +67,30 @@ export class AuthService {
     const { email, password } = user;
 
 
-    const userDB = await this.userRepository.findOne({ where: { email } });
-
+    const userDB = await this.userRepository.findOne({ where: { email } ,relations: ['admin', 'pc', 'mp', 'citizen']});
+    console.log(userDB)
     if (!userDB || !(await bcryptjs.compare(password, userDB.password))) {
       return resp.status(401).send({ message: 'Invalid Credentials.' });
     }
+    let role:string="admin";
+    if(userDB.citizen){
+        role="citizen";
+    }else if (userDB.pc){
+        role="pc";
+    }else if(userDB.mp){
+        role="mp";
+    }
+    const accessToken = await this.jwtService.signAsync({id:userDB.id,email:userDB.email,role:role}) 
 
-    const accessToken = sign({ id: userDB.id }, 'access_secret', {
-      expiresIn: 60 * 60,
-    });
 
-    const refreshToken = sign({ id: userDB.id }, 'refresh_secret', {
-      expiresIn: 24 * 60 * 60,
-    });
 
     resp.cookie('accessToken', accessToken, {
       httpOnly: true,
       maxAge: 24 * 60 * 60 * 1000, // 1 day
     });
 
-    resp.cookie('refreshToken', refreshToken, {
-      httpOnly: true,
-      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
-    });
 
-    resp.status(200).send({ message: 'Login success.' });
+    resp.status(200).send();
   }
 
   // AUTH USER

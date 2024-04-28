@@ -16,7 +16,7 @@ import { Citizen } from './citizen.entity';
 @Entity()
 export class User {
     @PrimaryGeneratedColumn('uuid')
-    id?: number;
+    id?: string;
 
     @Column({ nullable: false })
     firstName!: string;

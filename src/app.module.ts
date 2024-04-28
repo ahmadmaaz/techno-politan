@@ -9,6 +9,9 @@ import { PC } from './auth/entity/pc.entity';
 import { Admin } from './auth/entity/admin.entity';
 import { User } from './auth/entity/user.entity';
 import { AuthModule } from './auth/auth.module';
+import { CampaignModule } from './campaign/campaign.module';
+import Campaign from './campaign/entity/campaign.entity';
+import Comment from './campaign/entity/comment.entity';
 @Module({
   imports: [
 
@@ -19,12 +22,11 @@ import { AuthModule } from './auth/auth.module';
       username: 'postgres',
       password: 'DC8E6A353Mmaaz',
       database: 'technoPolitan',
-      entities: [Citizen,Admin,MP,PC,User],
+      entities: [Citizen,Admin,MP,PC,User,Campaign,Comment],
       synchronize: true,
     }),
-    
     AuthModule,
-
+    CampaignModule,
   ],
   controllers: [AppController],
   providers: [AppService],

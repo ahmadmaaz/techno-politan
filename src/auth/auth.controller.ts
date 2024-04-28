@@ -1,7 +1,6 @@
 import { Body, Controller, Get, Post, Req, Res } from '@nestjs/common';
 import { Request, Response } from 'express';
 import { AuthService } from './auth.service';
-import { User } from './entity/user.entity';
 import PCDto from './dto/pc.dto';
 import { CitizenDto } from './dto/citizen.dto';
 import MPDto from './dto/mp.dto';
@@ -15,7 +14,6 @@ export class AuthController {
     @Post("/signup/pc")
     signUpPc(@Body() dto:PCDto, @Res() res:Response){
         return this.authService.signUpPc(dto, res);
-
     }
     @Post("/signup/citizen")
     signUpCitizen(@Body() dto:CitizenDto, @Res() res:Response){

@@ -6,7 +6,7 @@ import { User } from "./user.entity";
 @Entity()
 export class MP {
     @PrimaryGeneratedColumn('uuid')
-    id?: number;
+    id?: string;
     @Column({ nullable: false })
     position!:string;
 

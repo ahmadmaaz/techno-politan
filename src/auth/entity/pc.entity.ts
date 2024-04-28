@@ -6,7 +6,7 @@ import { User } from "./user.entity";
 @Entity()
 export class PC {
     @PrimaryGeneratedColumn('uuid')
-    id?: number;
+    id?: string;
     @Column({ nullable: false })
     campaignName!:string;
 
