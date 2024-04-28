@@ -4,7 +4,8 @@ import { IsDate, IsEmail, IsNotEmpty, IsPhoneNumber, IsStrongPassword } from "cl
 export class UserDto{
 
     
-    id!: number;
+    
+    id: number;
 
     @IsNotEmpty()
     firstName!: string;

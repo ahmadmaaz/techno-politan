@@ -1,20 +1,17 @@
 import { Body, Controller, Get, Post, Req, Res } from '@nestjs/common';
 import { Request, Response } from 'express';
 import { AuthService } from './auth.service';
-import { User } from 'src/auth/entity/user.entity';
-import { PC } from './entity/pc.entity';
+import { User } from './entity/user.entity';
 import PCDto from './dto/pc.dto';
 import { CitizenDto } from './dto/citizen.dto';
 import MPDto from './dto/mp.dto';
+import { UserDto } from './dto/user.dto';
 
 @Controller('auth')
 export class AuthController {
     constructor(private readonly authService: AuthService) {}
 
-    @Post('/signup')
-    signUp(@Body() user: User, @Res() resp: Response) {
-      return this.authService.registerUser(user, resp);
-    }
+
     @Post("/signup/pc")
     signUpPc(@Body() dto:PCDto, @Res() res:Response){
         return this.authService.signUpPc(dto, res);
@@ -32,7 +29,7 @@ export class AuthController {
 
   
     @Post('/login')
-    loginUser(@Body() user: User, @Res() res: Response) {
+    loginUser(@Body() user: Pick<UserDto, 'email' | 'password'>, @Res() res: Response) {
       return this.authService.loginUser(user, res);
     }
   

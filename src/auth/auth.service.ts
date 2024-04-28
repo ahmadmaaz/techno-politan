@@ -4,10 +4,11 @@ import { sign, verify } from 'jsonwebtoken';
 import { Repository, QueryFailedError } from 'typeorm';
 import { Request, Response } from 'express';
 import * as bcryptjs from 'bcryptjs';
-import { User } from 'src/auth/entity/user.entity';
+import { User } from './entity/user.entity';
 import { CitizenDto } from './dto/citizen.dto';
 import MPDto from './dto/mp.dto';
 import PCDto from './dto/pc.dto';
+import { UserDto } from './dto/user.dto';
 
 @Injectable()
 export class AuthService {
@@ -51,6 +52,8 @@ export class AuthService {
     return await this.registerUser(user, res);
   }
   async registerUser(user: User, resp: Response) {
+    delete user.id;
+    delete user.createdAt;
     const userInDb = await this.userRepository.save({
         ...user,
         password: await bcryptjs.hash(user.password, 12),
@@ -58,21 +61,14 @@ export class AuthService {
     return resp.status(200).send(user);
   }
 
-  async loginUser(user: User, resp: Response) {
+  async loginUser(user: Pick<UserDto, 'email' | 'password'>, resp: Response) {
     const { email, password } = user;
 
-    // check for required fields
-    if (!email?.trim() || !password?.trim()) {
-      return resp
-        .status(500)
-        .send({ message: 'Not all required fields have been filled in.' });
-    }
 
     const userDB = await this.userRepository.findOne({ where: { email } });
 
-    // user not found or wrong password
     if (!userDB || !(await bcryptjs.compare(password, userDB.password))) {
-      return resp.status(500).send({ message: 'Invalid Credentials.' });
+      return resp.status(401).send({ message: 'Invalid Credentials.' });
     }
 
     const accessToken = sign({ id: userDB.id }, 'access_secret', {

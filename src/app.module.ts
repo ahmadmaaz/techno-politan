@@ -21,8 +21,8 @@ import { AuthModule } from './auth/auth.module';
       database: 'technoPolitan',
       entities: [Citizen,Admin,MP,PC,User],
       synchronize: true,
-      logging: true
     }),
+    
     AuthModule,
 
   ],
