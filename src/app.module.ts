@@ -11,6 +11,7 @@ import { User } from './auth/entity/user.entity';
 import { AuthModule } from './auth/auth.module';
 import { CampaignModule } from './campaign/campaign.module';
 import { LawModule } from './law/law.module';
+import { ComplaintModule } from './complaint/complaint.module';
 import Campaign from './campaign/entity/campaign.entity';
 import Comment from './campaign/entity/comment.entity';
 import Law from './law/entity/law.entity';
@@ -31,6 +32,7 @@ import LawModificationRequest from './law/entity/law-modification-request';
     AuthModule,
     CampaignModule,
     LawModule,
+    ComplaintModule,
   ],
   controllers: [AppController],
   providers: [AppService],
