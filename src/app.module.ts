@@ -10,6 +10,7 @@ import { Admin } from './auth/entity/admin.entity';
 import { User } from './auth/entity/user.entity';
 import { AuthModule } from './auth/auth.module';
 import { CampaignModule } from './campaign/campaign.module';
+import { LawModule } from './law/law.module';
 import Campaign from './campaign/entity/campaign.entity';
 import Comment from './campaign/entity/comment.entity';
 @Module({
@@ -27,6 +28,7 @@ import Comment from './campaign/entity/comment.entity';
     }),
     AuthModule,
     CampaignModule,
+    LawModule,
   ],
   controllers: [AppController],
   providers: [AppService],
