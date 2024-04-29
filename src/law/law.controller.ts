@@ -34,13 +34,13 @@ export class LawController {
 
     @UseGuards(AuthGuard)
     @Put("/upvote/:id")
-    upvoteCampaign(@Param('id') id: string,@Res() res:Response){
+    upvoteLaw(@Param('id') id: string,@Res() res:Response){
         return this.lawService.voteLaw(id,true,res);
     }
 
     @UseGuards(AuthGuard)
     @Put("/downvote/:id")
-    downvoteCampaign(@Param('id') id: string,@Res() res:Response){
+    downvoteLaw(@Param('id') id: string,@Res() res:Response){
         return this.lawService.voteLaw(id,false,res);
     }
 

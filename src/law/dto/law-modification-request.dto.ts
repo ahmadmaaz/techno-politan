@@ -5,18 +5,18 @@ import { User } from "../../auth/entity/user.entity";
 
 export default class LawModificationRequestDTO{
     @Exclude()
-    id: string;
+    id?: string;
 
     @IsNotEmpty()
     @IsString()
     description:string;
 
     @Exclude()
-    law:LawDTO
+    law?:LawDTO
 
     @Exclude()
-    user:User;
+    user?:User;
 
     @Exclude()
-    createdAt: Date;
+    createdAt?: Date;
 }

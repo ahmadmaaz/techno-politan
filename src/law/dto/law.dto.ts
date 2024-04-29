@@ -4,7 +4,7 @@ import LawModificationRequestDTO from "./law-modification-request.dto";
 
 export default class LawDTO{
     @Exclude()
-    id:string;
+    id?:string;
 
     @IsString()
     @IsNotEmpty()
@@ -27,5 +27,5 @@ export default class LawDTO{
 
 
     @Exclude()
-    createdAt: Date;
+    createdAt?: Date;
 }
