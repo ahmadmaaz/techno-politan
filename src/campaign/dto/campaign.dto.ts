@@ -1,17 +1,21 @@
 import { Exclude } from "class-transformer";
-import { IsNotEmpty, IsString } from "class-validator";
+import { ArrayMinSize, IsArray, IsIn, IsNotEmpty, IsString, Min, MinLength } from "class-validator";
 
 export default class CampaignDTO{
-    id: number;
+    @Exclude()
+    id?: number;
 
-    @IsNotEmpty()
+    @IsArray()
+    @ArrayMinSize(1)
     goals: string[];
 
-    @IsNotEmpty()
+    @IsArray()
+    @ArrayMinSize(1)
     candidateNames: string[];
 
     @IsNotEmpty()
     @IsString()
+    @IsIn(["Beirut","Mount Lebanon","Aley","Baabda"])  // For testing purposes we will keep only 4 districts
     district:string;
 
     @IsNotEmpty()
@@ -19,6 +23,7 @@ export default class CampaignDTO{
     politicalDependecy:string;
 
     @IsNotEmpty()
+    @Min(2024)
     year: number;
 
     @IsNotEmpty()
@@ -36,4 +41,7 @@ export default class CampaignDTO{
 
     @Exclude()
     isPoliticalArchive:boolean;
+
+    @Exclude()
+    createdAt?:Date;
 } 

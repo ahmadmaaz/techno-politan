@@ -1,7 +1,7 @@
 import { Body, Controller, Post, Req, Res, UseGuards } from '@nestjs/common';
 import { ComplaintService } from './complaint.service';
 import ComplaintDTO from './dto/complaint.dto';
-import { AuthGuard } from 'src/auth/auth.guard';
+import { AuthGuard } from '../auth/auth.guard';
 import { Request, Response } from 'express';
 
 @Controller('complaint')

@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import Law from './entity/law.entity';
 import LawDTO from './dto/law.dto';
-import { User } from 'src/auth/entity/user.entity';
+import { User } from '../auth/entity/user.entity';
 import { Response } from 'express';
 import { plainToClass } from 'class-transformer';
 import LawModificationRequest from './entity/law-modification-request';

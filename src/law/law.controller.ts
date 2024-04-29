@@ -1,9 +1,9 @@
 import { Body, Controller, Get, Param, Post, Put, Req, Res, UseGuards } from '@nestjs/common';
 import { LawService } from './law.service';
 import LawDTO from './dto/law.dto';
-import { AuthGuard } from 'src/auth/auth.guard';
-import { RoleGuard } from 'src/auth/role.guard';
-import { Roles } from 'src/auth/roles/roles.decorator';
+import { AuthGuard } from '../auth/auth.guard';
+import { RoleGuard } from '../auth/role.guard';
+import { Roles } from '../auth/roles/roles.decorator';
 import { Request, Response } from 'express';
 import LawModificationRequestDTO from './dto/law-modification-request.dto';
 

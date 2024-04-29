@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import Complaint from './entity/complaint.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { User } from 'src/auth/entity/user.entity';
+import { User } from '../auth/entity/user.entity';
 import { Repository } from 'typeorm';
 import ComplaintDTO from './dto/complaint.dto';
 import { Response } from 'express';
 import { plainToClass } from 'class-transformer';
-import Comment from 'src/campaign/entity/comment.entity';
+import Comment from '../campaign/entity/comment.entity';
 
 @Injectable()
 export class ComplaintService {
