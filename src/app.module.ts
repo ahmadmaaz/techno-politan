@@ -24,7 +24,7 @@ import LawModificationRequest from './law/entity/law-modification-request';
       host: '127.0.0.1',
       port:5432,
       username: 'postgres',
-      password: 'DC8E6A353Mmaaz',
+      password: '',
       database: 'technoPolitan',
       entities: [Citizen,Admin,MP,PC,User,Campaign,Comment,Law,LawModificationRequest],
       synchronize: true,
